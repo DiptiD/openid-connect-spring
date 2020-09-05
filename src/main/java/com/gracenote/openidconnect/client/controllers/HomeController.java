@@ -8,12 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-//import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +23,7 @@ import com.gracenote.openidconnect.client.security.OpenIdConnectUserDetails;
  * back from userinfo endpoint.
  */
 @Controller
+
 @Configuration
 public class HomeController {
 
@@ -36,7 +32,15 @@ public class HomeController {
 	@Value("${google.openidconnect.userinfo_uri}")
 	private String userInfoUri;
 
-	@RequestMapping("/home")
+	@RequestMapping("/something")
+
+	@ResponseBody
+	public final String getSomething() {
+		return "<h2>Secured Homepage</h2>" + "This is really something!";
+	}
+
+	@RequestMapping("/home2")
+
 	@ResponseBody
 	public final String homepage() {
 
@@ -53,8 +57,9 @@ public class HomeController {
 		return "<h2>Secured Homepage</h2>User Id: " + userDetails.getUsername()
 				+ (userDetails.getEmail() != null ? "<p>Email: " + userDetails.getEmail() : "");
 	}
-	
-	@RequestMapping("/home2")
+
+	@RequestMapping("/prajakta/token")
+
 	@ResponseBody
 	public final OpenIdConnectUserDetails homepage2() {
 

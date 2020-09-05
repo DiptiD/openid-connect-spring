@@ -50,8 +50,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
                 .and()
                 .authorizeRequests()
+                .antMatchers("/login", "/resources/static/js/*").permitAll()
                 .antMatchers(GET, "/").permitAll()
-                .antMatchers(GET, "/home").authenticated();
+                .antMatchers(GET, "/*").authenticated();
                 // .antMatchers("/","/index*").permitAll()
                 // .anyRequest().authenticated();
     }
